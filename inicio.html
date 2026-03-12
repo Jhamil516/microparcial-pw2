@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Netflix – Inicio</title>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      background: #141414;
+      color: white;
+      min-height: 100vh;
+    }
+
+    /* ===== NAV ===== */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      padding: 14px 44px;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.95) 0%, transparent 100%);
+    }
+    .back-btn {
+      background: rgba(255,255,255,0.15);
+      border: none; color: white;
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .back-btn:hover { background: rgba(255,255,255,0.25); }
+    .logo {
+      color: #E50914;
+      font-family: Arial Black, sans-serif;
+      font-size: 1.6rem;
+      font-weight: 900;
+      letter-spacing: 2px;
+    }
+    .nav-links { display: flex; gap: 18px; margin-left: 10px; }
+    .nav-links a {
+      color: #ccc; font-size: 0.85rem;
+      text-decoration: none; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: white; }
+    .nav-right { margin-left: auto; }
+    .nav-avatar {
+      width: 32px; height: 32px;
+      border-radius: 4px;
+      background: linear-gradient(135deg, #d63384, #7b2ff7);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; cursor: pointer;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      height: 520px;
+      background:
+        linear-gradient(to right,  rgba(0,0,0,0.85) 35%, rgba(0,0,0,0.1) 100%),
+        linear-gradient(to top,    #141414 2%,   transparent 25%),
+        url('https://occ-0-8407-2218.1.nflxso.net/dnm/api/v6/E8vDc_W8CLv7-yMQu8TFBQU0ALA/AAAABR47_d8R05L3b99hXU1CbYfmS8tXnqGNjm-FJXH38bULqb8mK-YHTakGgkHSSHMOz3u6bH3O7i5oGmZGvJv1h3FcHfD2lQ.jpg')
+        center / cover no-repeat;
+      display: flex;
+      align-items: flex-end;
+      padding: 0 60px 50px;
+      margin-top: 0;
+    }
+
+    .hero-content { max-width: 480px; }
+
+    .hero-logo-img {
+      background: #E50914;
+      color: white;
+      font-family: Arial Black, sans-serif;
+      font-size: 2.6rem;
+      font-weight: 900;
+      letter-spacing: 2px;
+      padding: 4px 14px;
+      border-radius: 3px;
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+    .hero-sub {
+      font-size: 0.75rem;
+      letter-spacing: 3px;
+      color: #ddd;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .hero-btns { display: flex; gap: 10px; margin-bottom: 16px; }
+    .btn-play {
+      display: flex; align-items: center; gap: 8px;
+      padding: 9px 22px;
+      background: #E50914;
+      color: white;
+      border: none; border-radius: 3px;
+      font-size: 0.88rem; font-weight: 700;
+      cursor: pointer; transition: background 0.2s;
+    }
+    .btn-play:hover { background: #f40612; }
+    .btn-watch {
+      display: flex; align-items: center; gap: 8px;
+      padding: 9px 22px;
+      background: rgba(100,100,100,0.6);
+      color: white; border: none; border-radius: 3px;
+      font-size: 0.88rem; font-weight: 600;
+      cursor: pointer; transition: background 0.2s;
+    }
+    .btn-watch:hover { background: rgba(130,130,130,0.7); }
+
+    .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+    .tag {
+      font-size: 0.72rem; color: #bbb;
+      border: 1px solid #555; border-radius: 3px;
+      padding: 3px 8px;
+    }
+
+    /* ===== ROWS ===== */
+    .section { padding: 10px 0 20px; }
+    .row-title {
+      font-size: 1rem;
+      font-weight: 700;
+      padding: 0 44px;
+      margin-bottom: 10px;
+      color: #e5e5e5;
+    }
+
+    .cards-row {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding: 4px 44px 12px;
+      scrollbar-width: none;
+    }
+    .cards-row::-webkit-scrollbar { display: none; }
+
+    .show-card {
+      min-width: 155px;
+      height: 88px;
+      border-radius: 4px;
+      overflow: hidden;
+      cursor: pointer;
+      flex-shrink: 0;
+      position: relative;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .show-card:hover {
+      transform: scale(1.07);
+      z-index: 5;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.7);
+    }
+    .show-card .lbl {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,0.88));
+      padding: 18px 7px 5px;
+      font-size: 0.7rem;
+      font-weight: 600;
+    }
+
+    /* Regular Show – highlighted + clickable */
+    .regular-card {
+      border: 2.5px solid #E50914;
+      box-shadow: 0 0 14px rgba(229,9,20,0.45);
+    }
+    .regular-card:hover {
+      box-shadow: 0 0 22px rgba(229,9,20,0.7);
+      transform: scale(1.1);
+    }
+
+    /* inline poster colors */
+    .c1  { background: linear-gradient(135deg,#1a237e,#4a148c); }
+    .c2  { background: linear-gradient(135deg,#880e4f,#4a0072); }
+    .c3  { background: linear-gradient(135deg,#006064,#004d40); }
+    .c4  { background: linear-gradient(135deg,#1b5e20,#33691e); }
+    .c5  { background: linear-gradient(135deg,#e65100,#bf360c); }
+    .c6  { background: linear-gradient(135deg,#212121,#37474f); }
+    .c7  { background: linear-gradient(135deg,#0d47a1,#1565c0); }
+    .c8  { background: linear-gradient(135deg,#4a148c,#880e4f); }
+    .c9  { background: linear-gradient(135deg,#1a237e,#283593); }
+    .c10 { background: linear-gradient(135deg,#f57f17,#e65100); }
+    .c11 { background: linear-gradient(135deg,#b71c1c,#880e4f); }
+    .c12 { background: linear-gradient(135deg,#263238,#37474f); }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <button class="back-btn" onclick="window.location.href='perfil.html'">←</button>
+    <span class="logo">NETFLIX</span>
+    <div class="nav-links">
+      <a href="#">Inicio</a>
+      <a href="#">Series</a>
+      <a href="#">Películas</a>
+      <a href="#">Novedades</a>
+      <a href="#">Mi lista</a>
+    </div>
+    <div class="nav-right">
+      <div class="nav-avatar">🐴</div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-content">
+      <div class="hero-logo-img">MONEY HEIST</div>
+      <div class="hero-sub">Parte 2</div>
+      <div class="hero-btns">
+        <button class="btn-play">▶ Play</button>
+        <button class="btn-watch">Watch Later</button>
+      </div>
+      <div class="hero-tags">
+        <span class="tag">Acción</span>
+        <span class="tag">Crimen</span>
+        <span class="tag">Drama</span>
+        <span class="tag">Netflix Original</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- New this week -->
+  <div class="section">
+    <div class="row-title">New this week</div>
+    <div class="cards-row">
+      <div class="show-card c1"><div class="lbl">Stranger Things</div></div>
+      <div class="show-card c2"><div class="lbl">Peaky Blinders</div></div>
+      <div class="show-card c3"><div class="lbl">Squid Game</div></div>
+      <div class="show-card c4"><div class="lbl">Dark</div></div>
+      <div class="show-card c5"><div class="lbl">Breaking Bad</div></div>
+      <div class="show-card c6"><div class="lbl">Ozark</div></div>
+      <div class="show-card c11"><div class="lbl">Narcos</div></div>
+      <div class="show-card c12"><div class="lbl">Mindhunter</div></div>
+    </div>
+  </div>
+
+  <!-- Trending Now -->
+  <div class="section">
+    <div class="row-title">Trending Now</div>
+    <div class="cards-row">
+      <!-- Regular Show — SOLO ESTE conecta a showdesc -->
+      <div class="show-card c7 regular-card" onclick="window.location.href='showdesc.html'" title="Regular Show">
+        <div class="lbl">⭐ Regular Show</div>
+      </div>
+      <div class="show-card c8"><div class="lbl">Bojack Horseman</div></div>
+      <div class="show-card c9"><div class="lbl">Adventure Time</div></div>
+      <div class="show-card c10"><div class="lbl">Gravity Falls</div></div>
+      <div class="show-card c5"><div class="lbl">Rick & Morty</div></div>
+      <div class="show-card c4"><div class="lbl">The Office</div></div>
+    </div>
+  </div>
+
+</body>
+</html>
