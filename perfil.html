@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Netflix – Perfil</title>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      min-height: 100vh;
+      background: #141414;
+      color: white;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* top bar */
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 32px;
+    }
+    .back-btn {
+      background: rgba(255,255,255,0.15);
+      border: none;
+      color: white;
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s;
+    }
+    .back-btn:hover { background: rgba(255,255,255,0.25); }
+    .topbar-right { width: 38px; } /* spacer */
+
+    /* center content */
+    .center {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 2.4rem;
+      font-weight: 500;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 44px;
+      color: #eee;
+    }
+
+    .profiles-grid {
+      display: flex;
+      gap: 28px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .profile {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+    }
+    .profile:hover .avatar { border-color: white; }
+    .profile:hover .pname { color: white; }
+
+    .avatar {
+      width: 130px;
+      height: 130px;
+      border-radius: 6px;
+      border: 3px solid transparent;
+      overflow: hidden;
+      transition: border-color 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4.5rem;
+    }
+
+    .pname {
+      font-size: 0.95rem;
+      color: #aaa;
+      transition: color 0.2s;
+    }
+
+    /* Avatars styled like Figma */
+    .av-bojack  { background: linear-gradient(140deg, #d63384, #7b2ff7); }
+    .av-diane   { background: linear-gradient(140deg, #f0a500, #e05c00); }
+    .av-peanut  { background: linear-gradient(140deg, #e8c000, #cc8800); }
+    .av-stif    { background: linear-gradient(140deg, #00b4d8, #0077b6); }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <button class="back-btn" onclick="window.location.href='sesion.html'">←</button>
+    <div class="topbar-right"></div>
+  </div>
+
+  <div class="center">
+    <h1>Quien esta mirando?</h1>
+    <div class="profiles-grid">
+
+      <div class="profile" onclick="window.location.href='inicio.html'">
+        <div class="avatar av-bojack">🐴</div>
+        <div class="pname">Bojack</div>
+      </div>
+
+      <div class="profile" onclick="window.location.href='inicio.html'">
+        <div class="avatar av-diane">👩‍💼</div>
+        <div class="pname">Diane</div>
+      </div>
+
+      <div class="profile" onclick="window.location.href='inicio.html'">
+        <div class="avatar av-peanut">🐶</div>
+        <div class="pname">Mr. Peanut</div>
+      </div>
+
+      <div class="profile" onclick="window.location.href='inicio.html'">
+        <div class="avatar av-stif" style="background:linear-gradient(140deg,#e91e63,#9c27b0); font-size:3.5rem;">🐱</div>
+        <div class="pname">Prindesa Dyane</div>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>
