@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Netflix – Elige tu plan</title>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      min-height: 100vh;
+      background: #1a1a1a;
+      color: white;
+    }
+
+    /* NAV */
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 14px 28px;
+      background: #111;
+      border-bottom: 1px solid #2a2a2a;
+    }
+    .back-btn {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: flex; align-items: center; gap: 6px;
+      padding: 6px 10px;
+      border-radius: 4px;
+    }
+    .back-btn:hover { background: rgba(255,255,255,0.1); }
+    .nav-logo {
+      color: #E50914;
+      font-weight: 900;
+      font-size: 1.4rem;
+      letter-spacing: 2px;
+      font-family: Arial Black, sans-serif;
+    }
+
+    /* CONTENT */
+    .page-title {
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: 700;
+      padding: 36px 20px 8px;
+    }
+    .page-sub {
+      text-align: center;
+      color: #aaa;
+      font-size: 0.85rem;
+      margin-bottom: 32px;
+    }
+
+    /* PLANS */
+    .plans-row {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      padding: 0 24px 48px;
+      flex-wrap: wrap;
+    }
+
+    .plan-card {
+      background: #2a2a2a;
+      border-radius: 6px;
+      width: 210px;
+      padding: 22px 18px 20px;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: border-color 0.2s, transform 0.15s;
+      position: relative;
+    }
+    .plan-card:hover { border-color: #E50914; transform: translateY(-3px); }
+
+    /* header bar per card */
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .card-name { font-size: 0.9rem; font-weight: 700; }
+    .card-flag {
+      display: flex; gap: 4px;
+    }
+    .flag {
+      width: 22px; height: 15px;
+      border-radius: 2px;
+      background: #555;
+      font-size: 0.5rem;
+      display: flex; align-items: center; justify-content: center;
+      color: #ccc;
+    }
+
+    /* payment chips */
+    .pay-row {
+      display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 10px;
+    }
+    .pay-chip {
+      background: #3a3a3a;
+      border-radius: 3px;
+      padding: 3px 8px;
+      font-size: 0.68rem;
+      color: #ccc;
+      border: 1px solid #444;
+      font-weight: 600;
+    }
+    .pay-chip.visa { color: #4f7fff; border-color: #4f7fff44; }
+    .pay-chip.mc   { color: #ff4444; border-color: #ff444444; }
+
+    .card-divider { height: 1px; background: #3a3a3a; margin: 10px 0; }
+
+    .field-row {
+      display: flex; flex-direction: column; gap: 6px; margin-bottom: 8px;
+    }
+    .field {
+      background: #1a1a1a;
+      border-radius: 3px;
+      padding: 7px 10px;
+      font-size: 0.72rem;
+      color: #888;
+      border: 1px solid #333;
+    }
+
+    .field-inline { display: flex; gap: 6px; }
+    .field-inline .field { flex: 1; }
+
+    .price-row {
+      display: flex; justify-content: space-between; align-items: center; margin-top: 6px;
+    }
+    .price-label { font-size: 0.72rem; color: #aaa; }
+    .price-val { font-size: 0.85rem; font-weight: 700; color: #E50914; }
+
+    .btn-pagar {
+      width: 100%;
+      margin-top: 14px;
+      padding: 10px;
+      background: #E50914;
+      color: white;
+      border: none;
+      border-radius: 3px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      letter-spacing: 0.5px;
+      transition: background 0.2s;
+    }
+    .btn-pagar:hover { background: #f40612; }
+  </style>
+</head>
+<body>
+  <div class="nav">
+    <button class="back-btn" onclick="window.location.href='sesion.html'">← Netflix Account</button>
+    <span class="nav-logo">NETFLIX</span>
+  </div>
+
+  <div class="page-title">Elige tu plan</div>
+  <div class="page-sub">Cancela cuando quieras. Sin compromisos.</div>
+
+  <div class="plans-row">
+
+    <!-- BÁSICO -->
+    <div class="plan-card" onclick="goToCompra('Básico 720p','Bs. 39')">
+      <div class="card-header">
+        <div class="card-name">Básico 720p</div>
+        <div class="card-flag">
+          <div class="flag">🇧🇴</div>
+        </div>
+      </div>
+      <div class="pay-row">
+        <div class="pay-chip visa">VISA</div>
+        <div class="pay-chip mc">MC</div>
+        <div class="pay-chip">Debit</div>
+        <div class="pay-chip">See all</div>
+      </div>
+      <div class="card-divider"></div>
+      <div class="field-row">
+        <div class="field">Número de tarjeta</div>
+        <div class="field">Nombre en tarjeta</div>
+        <div class="field-inline">
+          <div class="field">Vencimiento</div>
+          <div class="field">CVV</div>
+        </div>
+      </div>
+      <div class="price-row">
+        <span class="price-label">Precio mensual</span>
+        <span class="price-val">Bs. 39</span>
+      </div>
+      <div class="price-row">
+        <span class="price-label">Total (incl. 13% IT)</span>
+        <span class="price-val">Bs. 44</span>
+      </div>
+      <button class="btn-pagar">PAGESAR</button>
+    </div>
+
+    <!-- ESTÁNDAR -->
+    <div class="plan-card" style="border-color:#555;" onclick="goToCompra('Estándar 1080p','Bs. 59')">
+      <div class="card-header">
+        <div class="card-name">Estándar 1080p</div>
+        <div class="card-flag">
+          <div class="flag">🇧🇴</div>
+        </div>
+      </div>
+      <div class="pay-row">
+        <div class="pay-chip visa">VISA</div>
+        <div class="pay-chip mc">MC</div>
+        <div class="pay-chip">Debit</div>
+        <div class="pay-chip">See all</div>
+      </div>
+      <div class="card-divider"></div>
+      <div class="field-row">
+        <div class="field">Número de tarjeta</div>
+        <div class="field">Nombre en tarjeta</div>
+        <div class="field-inline">
+          <div class="field">Vencimiento</div>
+          <div class="field">CVV</div>
+        </div>
+      </div>
+      <div class="price-row">
+        <span class="price-label">Precio mensual</span>
+        <span class="price-val">Bs. 59</span>
+      </div>
+      <div class="price-row">
+        <span class="price-label">Total (incl. 13% IT)</span>
+        <span class="price-val">Bs. 66.67</span>
+      </div>
+      <button class="btn-pagar">PAGESAR</button>
+    </div>
+
+    <!-- PREMIUM -->
+    <div class="plan-card" onclick="goToCompra('Premium 4K','Bs. 89')">
+      <div class="card-header">
+        <div class="card-name">Premium 4k</div>
+        <div class="card-flag">
+          <div class="flag">🇧🇴</div>
+        </div>
+      </div>
+      <div class="pay-row">
+        <div class="pay-chip visa">VISA</div>
+        <div class="pay-chip mc">MC</div>
+        <div class="pay-chip">Debit</div>
+        <div class="pay-chip">See all</div>
+      </div>
+      <div class="card-divider"></div>
+      <div class="field-row">
+        <div class="field">Número de tarjeta</div>
+        <div class="field">Nombre en tarjeta</div>
+        <div class="field-inline">
+          <div class="field">Vencimiento</div>
+          <div class="field">CVV</div>
+        </div>
+      </div>
+      <div class="price-row">
+        <span class="price-label">Precio mensual</span>
+        <span class="price-val">Bs. 89</span>
+      </div>
+      <div class="price-row">
+        <span class="price-label">Total (incl. 13% IT)</span>
+        <span class="price-val">Bs. 100.57</span>
+      </div>
+      <button class="btn-pagar">PAGESAR</button>
+    </div>
+
+  </div>
+
+  <script>
+    function goToCompra(plan, price) {
+      localStorage.setItem('selectedPlan', plan);
+      localStorage.setItem('selectedPrice', price);
+      window.location.href = 'compra.html';
+    }
+  </script>
+</body>
+</html>
