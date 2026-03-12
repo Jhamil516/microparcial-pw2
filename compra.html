@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Netflix – Compra</title>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      min-height: 100vh;
+      background: #1e1e1e;
+      color: white;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 24px;
+      background: #141414;
+      border-bottom: 1px solid #2a2a2a;
+    }
+    .back-btn {
+      background: none; border: none; color: white;
+      font-size: 0.85rem; cursor: pointer;
+      display: flex; align-items: center; gap: 6px;
+      padding: 6px 10px; border-radius: 4px;
+    }
+    .back-btn:hover { background: rgba(255,255,255,0.08); }
+    .nav-logo {
+      color: #E50914; font-weight: 900; font-size: 1.3rem;
+      letter-spacing: 2px; font-family: Arial Black, sans-serif;
+    }
+
+    .layout {
+      display: flex;
+      gap: 0;
+      flex: 1;
+      max-width: 860px;
+      margin: 0 auto;
+      width: 100%;
+      padding: 36px 24px;
+      gap: 32px;
+    }
+
+    /* LEFT - form */
+    .form-side { flex: 1; }
+
+    .section-title {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 18px;
+      color: #eee;
+    }
+
+    .verify-box {
+      background: #2a2a2a;
+      border-radius: 6px;
+      padding: 16px 18px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.82rem;
+      color: #ccc;
+    }
+    .verify-icon {
+      width: 36px; height: 36px;
+      background: #3a3a3a;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .card-icons-row {
+      display: flex; gap: 8px; margin-bottom: 16px;
+    }
+    .ci {
+      background: white;
+      border-radius: 4px;
+      padding: 5px 10px;
+      font-size: 0.68rem;
+      font-weight: 800;
+    }
+    .ci.visa { color: #1a1aff; }
+    .ci.mc { color: #eb001b; }
+    .ci.amex { color: #007dc4; }
+    .ci.pp { color: #003087; }
+
+    .form-group { margin-bottom: 13px; }
+    .form-group label {
+      display: block;
+      font-size: 0.75rem;
+      color: #999;
+      margin-bottom: 5px;
+    }
+    .form-group input {
+      width: 100%;
+      padding: 12px 14px;
+      background: #2a2a2a;
+      border: 1px solid #3a3a3a;
+      border-radius: 4px;
+      color: white;
+      font-size: 0.88rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-group input:focus { border-color: #E50914; }
+    .form-group input::placeholder { color: #555; }
+
+    .form-row { display: flex; gap: 10px; }
+    .form-row .form-group { flex: 1; }
+
+    /* RIGHT - summary */
+    .summary-side {
+      width: 260px;
+      flex-shrink: 0;
+    }
+
+    .summary-card {
+      background: #2a2a2a;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .summary-header {
+      background: #E50914;
+      padding: 12px 16px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .summary-body { padding: 16px; }
+
+    .sum-plan-name {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .sum-plan-qual {
+      font-size: 0.75rem;
+      color: #aaa;
+      margin-bottom: 14px;
+    }
+
+    .sum-row {
+      display: flex; justify-content: space-between;
+      font-size: 0.8rem;
+      padding: 7px 0;
+      border-top: 1px solid #3a3a3a;
+      color: #ccc;
+    }
+    .sum-row.total {
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: white;
+    }
+    .sum-row span:last-child { color: #E50914; }
+
+    .btn-checkout {
+      width: 100%;
+      margin-top: 16px;
+      padding: 12px;
+      background: #E50914;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-checkout:hover { background: #f40612; }
+
+    .secure-note {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.72rem;
+      color: #777;
+      margin-top: 12px;
+      justify-content: center;
+    }
+
+    @media (max-width: 600px) {
+      .layout { flex-direction: column; }
+      .summary-side { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="nav">
+    <button class="back-btn" onclick="window.location.href='plan.html'">← Netflix Account</button>
+    <span class="nav-logo">NETFLIX</span>
+  </div>
+
+  <div class="layout">
+    <div class="form-side">
+      <div class="section-title">Card Details</div>
+
+      <div class="verify-box">
+        <div class="verify-icon">🔒</div>
+        <div>Completa Netflix<br/><span style="color:#aaa;font-size:0.75rem;">Verifica tu información de pago</span></div>
+      </div>
+
+      <div class="card-icons-row">
+        <div class="ci visa">VISA</div>
+        <div class="ci mc">MC</div>
+        <div class="ci amex">AMEX</div>
+        <div class="ci pp">PayPal</div>
+      </div>
+
+      <div class="form-group">
+        <label>Número de tarjeta</label>
+        <input type="text" id="card-num" placeholder="1234 5678 9012 3456" maxlength="19"/>
+      </div>
+      <div class="form-group">
+        <label>Nombre en la tarjeta</label>
+        <input type="text" placeholder="Nombre completo"/>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Fecha de expiración</label>
+          <input type="text" placeholder="MM/AA" maxlength="5"/>
+        </div>
+        <div class="form-group">
+          <label>CVV</label>
+          <input type="text" placeholder="123" maxlength="3"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Subtotal</label>
+        <input type="text" id="subtotal-field" readonly style="color:#E50914; background:#222;"/>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Importe (13% IT)</label>
+          <input type="text" id="tax-field" readonly style="color:#aaa; background:#222;"/>
+        </div>
+        <div class="form-group">
+          <label>Total Pago</label>
+          <input type="text" id="total-field" readonly style="color:#E50914; font-weight:700; background:#222;"/>
+        </div>
+      </div>
+    </div>
+
+    <div class="summary-side">
+      <div class="summary-card">
+        <div class="summary-header">Resumen de pedido</div>
+        <div class="summary-body">
+          <div class="sum-plan-name" id="plan-name">Plan Estándar</div>
+          <div class="sum-plan-qual" id="plan-qual">1080p · Full HD</div>
+          <div class="sum-row"><span>Mensualidad</span><span id="s-price">Bs. 59</span></div>
+          <div class="sum-row"><span>Impuesto 13%</span><span id="s-tax">Bs. 7.67</span></div>
+          <div class="sum-row total"><span>Total</span><span id="s-total">Bs. 66.67</span></div>
+        </div>
+      </div>
+      <button class="btn-checkout" onclick="window.location.href='perfil.html'">Checkout</button>
+      <div class="secure-note">🔒 Pago 100% seguro y encriptado</div>
+    </div>
+  </div>
+
+  <script>
+    const plan  = localStorage.getItem('selectedPlan')  || 'Estándar 1080p';
+    const price = localStorage.getItem('selectedPrice') || 'Bs. 59';
+    const num   = parseFloat(price.replace('Bs. ',''));
+    const tax   = +(num * 0.13).toFixed(2);
+    const total = +(num + tax).toFixed(2);
+
+    document.getElementById('plan-name').textContent = plan;
+    document.getElementById('s-price').textContent   = price;
+    document.getElementById('s-tax').textContent     = 'Bs. ' + tax;
+    document.getElementById('s-total').textContent   = 'Bs. ' + total;
+    document.getElementById('subtotal-field').value  = price;
+    document.getElementById('tax-field').value       = 'Bs. ' + tax;
+    document.getElementById('total-field').value     = 'Bs. ' + total;
+
+    const quals = {
+      'Básico 720p': '720p · HD',
+      'Estándar 1080p': '1080p · Full HD',
+      'Premium 4K': '4K · Ultra HD'
+    };
+    document.getElementById('plan-qual').textContent = quals[plan] || '';
+
+    // Card number formatter
+    document.getElementById('card-num').addEventListener('input', function() {
+      this.value = this.value.replace(/\D/g,'').substring(0,16).replace(/(.{4})/g,'$1 ').trim();
+    });
+  </script>
+</body>
+</html>
